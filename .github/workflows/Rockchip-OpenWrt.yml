@@ -193,8 +193,10 @@ jobs:
         echo -e "Total CPU cores\t: $(nproc)"
         cat /proc/cpuinfo | grep 'model name'
         cpu_name=$(cat /proc/cpuinfo | grep "model name" | head -n 1 | awk -F: '{print $2}' | sed 's/^[ \t]*//')
-        if [[ "$cpu_name" =~ "8370C" ]] || [[ "$cpu_name" =~ "8272CL" ]]; then
-        echo "CPU为8370C或8272CL，继续执行命令"
+        if [[ "$cpu_name" =~ "8370C" ]]; then
+        echo "CPU为8370C，继续执行命令"
+        elif [[ "$cpu_name" =~ "8272CL" ]]; then 
+        echo "CPU为8272CL，继续执行命令"
         else
         echo "CPU不为8370C或8272CL，性能不足，停止执行命令"
         exit 1
