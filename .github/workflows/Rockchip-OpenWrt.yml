@@ -188,21 +188,6 @@ jobs:
         echo "--------------------------硬盘信息--------------------------"
         echo "硬盘数量：$(ls /dev/sd* | grep -v [1-9] | wc -l)" && df -hT
 
-    - name: Show system
-      run: |
-        echo -e "Total CPU cores\t: $(nproc)"
-        cat /proc/cpuinfo | grep 'model name'
-        cpu_name=$(cat /proc/cpuinfo | grep "model name" | head -n 1 | awk -F: '{print $2}' | sed 's/^[ \t]*//')
-        if [[ "$cpu_name" =~ "8370C" ]]; then
-        echo "CPU为8370C，继续执行命令"
-        elif [[ "$cpu_name" =~ "8272CL" ]]; then 
-        echo "CPU为8272CL，继续执行命令"
-        else
-        echo "CPU不为8370C或8272CL，性能不足，停止执行命令"
-        exit 1
-        ulimit -a
-        fi
-
     - name: Initialization Environment
       env:
         DEBIAN_FRONTEND: noninteractive
