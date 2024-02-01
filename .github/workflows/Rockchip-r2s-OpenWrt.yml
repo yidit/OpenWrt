@@ -1,4 +1,4 @@
-name: Rockchip OpenWrt
+name: Rockchip Mini OpenWrt
 
 on:
   workflow_dispatch:
@@ -6,14 +6,14 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: configs/rockchip.config
-  EXTRA_CONFIG: configs/extra.config
+  CONFIG_FILE: configs/rockchip-r2s.config
+  EXTRA_CONFIG: configs/extra-mini.config
   DIY_SCRIPT: diy-script.sh
   CLASH_KERNEL: arm64
   CACHE_TOOLCHAIN: true
   UPLOAD_BIN_DIR: false
   FIRMWARE_RELEASE: true
-  FIRMWARE_TAG: Rockchip
+  FIRMWARE_TAG: Rockchip_R2S
   TZ: Asia/Shanghai
 
 jobs:
