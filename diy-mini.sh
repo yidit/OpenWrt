@@ -6,9 +6,6 @@ sed -i 's/192.168.1.1/192.168.100.1/g' package/base-files/files/bin/config_gener
 # TTYD 免登录
 # sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 
-# 更改默认 Shell 为 bash
-sed -i 's/\/bin\/ash/\/bin\/bash/g' package/base-files/files/etc/passwd
-
 # 移除要替换的包
 rm -rf feeds/packages/net/mosdns
 rm -rf feeds/packages/net/msd_lite
@@ -110,6 +107,13 @@ sed -i 's/"admin"/"admin", "services"/g' feeds/luci/applications/luci-app-docker
 sed -i 's/"admin"/"admin", "services"/g; s/admin\//admin\/services\//g' feeds/luci/applications/luci-app-dockerman/luasrc/model/cbi/dockerman/*.lua
 sed -i 's/admin\//admin\/services\//g' feeds/luci/applications/luci-app-dockerman/luasrc/view/dockerman/*.htm
 sed -i 's|admin\\|admin\\/services\\|g' feeds/luci/applications/luci-app-dockerman/luasrc/view/dockerman/container.htm
+
+# 自定义设置
+sed -i 's/("iKoolProxy 滤广告"), 1)/("iKoolProxy 滤广告"), 2)/g' package/luci-app-ikoolproxy/luasrc/controller/koolproxy.lua
+sed -i 's/ _("Reboot"), 90/ _("Reboot"), 98/g' feeds/luci/modules/luci-mod-admin-full/luasrc/controller/admin/system.lua
+sed -i 's#'https://raw.githubusercontent.com/jow-/oui-database/master/oui.json'#'https://mirror.ghproxy.com/https://raw.githubusercontent.com/jow-/oui-database/master/oui.json'#g' feeds/luci/applications/luci-app-nlbwmon/luasrc/view/nlbw/display.htm
+sed -i 's/_("PassWall 2"), -1/_("PassWall 2"), 1/g' feeds/luci/applications/luci-app-nlbwmon/luasrc/view/nlbw/display.htm
+sed -i 's/\/bin\/ash/\/bin\/bash/g' package/base-files/files/etc/passwd
 
 # 调整 ZeroTier 到 服务 菜单
 # sed -i 's/vpn/services/g; s/VPN/Services/g' feeds/luci/applications/luci-app-zerotier/luasrc/controller/zerotier.lua
