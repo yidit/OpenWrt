@@ -6,9 +6,6 @@ sed -i 's/192.168.1.1/192.168.100.1/g' package/base-files/files/bin/config_gener
 # 更改默认 Shell 为 zsh
 # sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 
-# 更改默认 Shell 为 bash
-sed -i 's/\/bin\/ash/\/bin\/bash/g' package/base-files/files/etc/passwd
-
 # 移除要替换的包
 rm -rf feeds/packages/net/mosdns
 rm -rf feeds/packages/net/msd_lite
@@ -121,6 +118,13 @@ find package/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/
 # sed -i 's/services/vpn/g' feeds/luci/applications/luci-app-v2ray-server/luasrc/controller/*.lua
 # sed -i 's/services/vpn/g' feeds/luci/applications/luci-app-v2ray-server/luasrc/model/cbi/v2ray_server/*.lua
 # sed -i 's/services/vpn/g' feeds/luci/applications/luci-app-v2ray-server/luasrc/view/v2ray_server/*.htm
+
+# 自定义设置
+sed -i 's/("iKoolProxy 滤广告"), 1)/("iKoolProxy 滤广告"), 2)/g' package/luci-app-ikoolproxy/luasrc/controller/koolproxy.lua
+sed -i 's/ _("Reboot"), 90/ _("Reboot"), 98/g' feeds/luci/modules/luci-mod-admin-full/luasrc/controller/admin/system.lua
+sed -i 's#'https://raw.githubusercontent.com/jow-/oui-database/master/oui.json'#'https://mirror.ghproxy.com/https://raw.githubusercontent.com/jow-/oui-database/master/oui.json'#g' feeds/luci/applications/luci-app-nlbwmon/luasrc/view/nlbw/display.htm
+sed -i 's/_("PassWall 2"), -1/_("PassWall 2"), 1/g' feeds/luci/applications/luci-app-nlbwmon/luasrc/view/nlbw/display.htm
+sed -i 's/\/bin\/ash/\/bin\/bash/g' package/base-files/files/etc/passwd
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
